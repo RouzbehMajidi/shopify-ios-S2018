@@ -25,6 +25,20 @@ struct Product : Codable{
     var options : [Option]
     
     var variants : [Variant]
+    
+    func getLowestPrice() -> String{
+        var lowestPrice = Double.greatestFiniteMagnitude
+        
+        for variant in variants {
+            if let value = Double(variant.price){
+                if value < lowestPrice{
+                    lowestPrice = value
+                }
+            }
+        }
+        
+        return "𝕾 "+String(lowestPrice)
+    }
 
 }
 

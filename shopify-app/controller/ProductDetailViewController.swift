@@ -7,20 +7,36 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class ProductDetailViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var productTitle: UILabel!
+    @IBOutlet weak var productPrice: UILabel!
+    @IBOutlet weak var productDescription: UITextView!
+    @IBOutlet weak var productVendor: UILabel!
     
     var product : Product!
-    var image : UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = product.title
+        
         productTitle.text = product.title
-        imageView.image = image
+        productVendor.text = product.vendor
+        productDescription.text = product.body_html
+        productPrice.text = "From " + product.getLowestPrice()
+        
+        Alamofire.request(product.image.source).responseImage { (response) in
+            if let image = UIImage(data: response.data!){
+                self.imageView.image = image
+            }else{
+                self.imageView.image = UIImage(named: "shopify-bag")!
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -7,9 +7,16 @@
 //
 
 import Foundation
+import UIKit
+import Alamofire
 
 struct Image : Codable {
     
-    var src : String
+    var source : String
+    
+    enum CodingKeys: String, CodingKey {
+        case source = "src"
+    }
+
     
 }

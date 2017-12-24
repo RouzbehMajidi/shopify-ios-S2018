@@ -25,30 +25,22 @@ class Utils {
             
             switch response.result {
             case .success:
-                print("Validation Successful")
+                if let json = response.data {
+                    
+                    let jsonDecoder = JSONDecoder()
+                    
+                    do{
+                        try products = jsonDecoder.decode([String : [Product]].self, from: json)
+                    }catch let error{
+                        print(error)
+                    }
+                    
+                }
+                
+                completion(products["products"]!)
             case .failure(let error):
                 print(error)
             }
-            
-            if let json = response.data {
-                
-                let jsonDecoder = JSONDecoder()
-                
-                print("JSON: \(json.debugDescription)") // serialized json response
-                
-                do{
-                    try products = jsonDecoder.decode([String : [Product]].self, from: json)
-                }catch let error{
-                    print(error)
-                }
-                
-            }else{
-                print("Couldnt cast")
-            }
-            
-            
-            completion(products["products"]!)
-            
         }
     }
     

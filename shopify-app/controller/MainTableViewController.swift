@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import AlamofireImage
 
 class MainTableViewController: UITableViewController {
     
@@ -18,7 +19,6 @@ class MainTableViewController: UITableViewController {
         
         Utils.getProducts(page: 1, completion: {products -> Void in
             self.products = products
-            print(products.count)
             self.tableView.reloadData()
         })
         
@@ -49,8 +49,12 @@ class MainTableViewController: UITableViewController {
         cell.productName.text = product.title
         cell.productDescription.text = product.body_html
         
-        Alamofire.request(product.image.src).responseData { (response) in
-            cell.productImageView.image = UIImage(data: response.data!)
+        Alamofire.request(product.image.source).responseImage { (response) in
+            if let image = UIImage(data: response.data!){
+                cell.productImageView.image = image
+            }else{
+                cell.productImageView.image = UIImage(named: "shopify-bag")!
+            }
         }
         
         return cell
@@ -63,7 +67,6 @@ class MainTableViewController: UITableViewController {
         if let indexPath = tableView.indexPath(for: cell){
             let controller = segue.destination as! ProductDetailViewController
             controller.product = products[indexPath.row]
-            controller.image = cell.imageView?.image
         }
     }
 

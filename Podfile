@@ -7,4 +7,5 @@ target 'shopify-app' do
 
   # Pods for shopify-app
   pod 'Alamofire'
+  pod 'AlamofireImage'
 end

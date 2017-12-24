@@ -15,4 +15,9 @@ struct Variant : Codable {
     var grams : Double
     var inventory_quantity : Int
     
+    
+    func getFormattedPrice(withCurrency currency: String) -> String{
+        return currency + price
+    }
+    
 }

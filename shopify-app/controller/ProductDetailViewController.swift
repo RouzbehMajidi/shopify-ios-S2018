@@ -28,7 +28,7 @@ class ProductDetailViewController: UIViewController {
         productTitle.text = product.title
         productVendor.text = product.vendor
         productDescription.text = product.body_html
-        productPrice.text = "From " + product.getLowestPrice()
+        productPrice.text = "From 𝕾" + product.getLowestPrice()
         
         Alamofire.request(product.image.source).responseImage { (response) in
             if let image = UIImage(data: response.data!){
@@ -45,7 +45,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let controller = segue.destination as? VariantTableViewController{
+        if let controller = segue.destination.childViewControllers[0] as? VariantTableViewController{
             controller.variants = product.variants
         }
     }

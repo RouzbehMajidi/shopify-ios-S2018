@@ -37,7 +37,7 @@ struct Product : Codable{
             }
         }
         
-        return "𝕾 "+String(lowestPrice)
+        return String(lowestPrice)
     }
 
 }

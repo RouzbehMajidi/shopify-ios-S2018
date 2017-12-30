@@ -76,8 +76,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="NSO-Tl-VQ3"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="k80-G3-A4O" id="aiU-C5-NHa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bOI-br-YyW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="k80-G3-A4O">
+                    <connections>
+                        <outlet property="delegate" destination="fYB-nJ-IO3" id="G2y-rf-31Z"/>
+                        <outlet property="searchContentsController" destination="fYB-nJ-IO3" id="9oG-kE-FWw"/>
+                        <outlet property="searchResultsDataSource" destination="fYB-nJ-IO3" id="aPS-Qy-pVP"/>
+                        <outlet property="searchResultsDelegate" destination="fYB-nJ-IO3" id="Ca6-HA-k8K"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="-204" y="70.614692653673174"/>
         </scene>
@@ -196,7 +207,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="u6e-Jd-5qc">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bMF-dw-LhN"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bMF-dw-LhN">
+                            <connections>
+                                <action selector="cancel:" destination="mZJ-YO-8lL" id="nX4-T9-xKw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ppi-ur-9wL" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,6 +14,8 @@ class VariantTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Variants"
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,6 +34,18 @@ class VariantTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return variants.count
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let alertController = UIAlertController(title: "Purchase Successful", message: "The item has been shipped to your home address", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel Order", style: .cancel, handler: nil)
+        alertController.addAction(action)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true, completion: nil)
+
+    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,10 +55,18 @@ class VariantTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "variantViewCell", for: indexPath) as! VariantTableViewCell
         
         cell.variantName.text = variant.title
-        cell.priceLabel.text = variant.price
+        cell.priceLabel.text = "𝕾" + variant.price
 
         // Configure the cell...
 
         return cell
     }
+    
+    @IBAction func cancel(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
 }

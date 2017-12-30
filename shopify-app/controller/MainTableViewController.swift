@@ -13,13 +13,24 @@ import AlamofireImage
 class MainTableViewController: UITableViewController {
     
     var products = [Product]()
+    
+    var filteredProducts = [Product]()
+    
     var nextPage = 1
     var hasMoreProducts = true
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Galactify by Rouzbeh Majidi"
+        self.title = "Galactify"
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Products"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         loadNext()
     }
@@ -36,16 +47,29 @@ class MainTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.count
+        
+        if isFiltering() {
+            return filteredProducts.count
+        }else {
+            return products.count
+        }
+    
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let product = products[indexPath.row]
         
+        var product : Product
+        
+        if isFiltering() {
+            product = filteredProducts[indexPath.row]
+        }else {
+            product = products[indexPath.row]
+        }
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "productViewCell", for: indexPath) as! ProductTableViewCell
         
-        if hasMoreProducts && indexPath.row == self.products.count - 10 {
+        if hasMoreProducts && indexPath.row >= getProductCount() - 10 {
             loadNext()
         }
 
@@ -64,6 +88,14 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
+    func getProductCount() -> Int{
+        if isFiltering(){
+            return filteredProducts.count
+        }else{
+            return products.count
+        }
+    }
+    
     func loadNext(){
         
         Utils.getProducts(page: nextPage, completion: {products -> Void in
@@ -71,7 +103,13 @@ class MainTableViewController: UITableViewController {
                 self.hasMoreProducts = false
             }else{
                 self.products += products
-                self.tableView.reloadData()
+                
+                if self.isFiltering(){
+                    self.filterContent()
+                }else{
+                   self.tableView.reloadData()
+                }
+
                 self.nextPage += 1
             }
         })
@@ -87,5 +125,33 @@ class MainTableViewController: UITableViewController {
             controller.product = products[indexPath.row]
         }
     }
+    
+    
+    func isSearchBarEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContent(){
+        let searchText = searchController.searchBar.text!
+        
+        filteredProducts = products.filter({ (product : Product) -> Bool in
+            return product.title.lowercased().contains(searchText.lowercased()) || product.tags.lowercased().contains(searchText.lowercased()) ||
+                product.vendor.lowercased().contains(searchText.lowercased())
+            })
+        
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !isSearchBarEmpty()
+    }
 
+}
+
+extension MainTableViewController: UISearchResultsUpdating{
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContent()
+    }
+    
 }

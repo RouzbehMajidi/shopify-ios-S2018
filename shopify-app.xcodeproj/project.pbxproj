@@ -21,6 +21,8 @@
 		AF9DAAAA1FE73A0600CC3552 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF9DAAA81FE73A0600CC3552 /* LaunchScreen.storyboard */; };
 		AF9DAAB41FE73BEE00CC3552 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9DAAB31FE73BEE00CC3552 /* MainTableViewController.swift */; };
 		AFF4CB5D1FEF6F7700B47E4E /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4CB5C1FEF6F7700B47E4E /* ProductDetailViewController.swift */; };
+		AFF4CB5F1FF0B6A700B47E4E /* VariantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4CB5E1FF0B6A700B47E4E /* VariantTableViewCell.swift */; };
+		AFF4CB611FF0B72E00B47E4E /* VariantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF4CB601FF0B72E00B47E4E /* VariantTableViewController.swift */; };
 		F564C63239444F4C3595C93E /* Pods_shopify_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C464F28FCC5D404C16DC4BD /* Pods_shopify_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +46,8 @@
 		AF9DAAAB1FE73A0600CC3552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF9DAAB31FE73BEE00CC3552 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		AFF4CB5C1FEF6F7700B47E4E /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		AFF4CB5E1FF0B6A700B47E4E /* VariantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantTableViewCell.swift; sourceTree = "<group>"; };
+		AFF4CB601FF0B72E00B47E4E /* VariantTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariantTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				AF945E7D1FEF5C280086DA6B /* ProductTableViewCell.swift */,
+				AFF4CB5E1FF0B6A700B47E4E /* VariantTableViewCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -127,6 +132,7 @@
 			children = (
 				AF9DAAB31FE73BEE00CC3552 /* MainTableViewController.swift */,
 				AFF4CB5C1FEF6F7700B47E4E /* ProductDetailViewController.swift */,
+				AFF4CB601FF0B72E00B47E4E /* VariantTableViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -277,9 +283,11 @@
 				AF945E711FE745EC0086DA6B /* Product.swift in Sources */,
 				AF9DAAA51FE73A0600CC3552 /* shopify_app.xcdatamodeld in Sources */,
 				AF9DAA9D1FE73A0600CC3552 /* AppDelegate.swift in Sources */,
+				AFF4CB611FF0B72E00B47E4E /* VariantTableViewController.swift in Sources */,
 				AF945E781FE759750086DA6B /* Variant.swift in Sources */,
 				AFF4CB5D1FEF6F7700B47E4E /* ProductDetailViewController.swift in Sources */,
 				AF945E7C1FEB3EDC0086DA6B /* Option.swift in Sources */,
+				AFF4CB5F1FF0B6A700B47E4E /* VariantTableViewCell.swift in Sources */,
 				AF945E761FE749DE0086DA6B /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

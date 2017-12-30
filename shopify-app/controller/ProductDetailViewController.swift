@@ -44,6 +44,12 @@ class ProductDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? VariantTableViewController{
+            controller.variants = product.variants
+        }
+    }
+    
 
     /*
     // MARK: - Navigation

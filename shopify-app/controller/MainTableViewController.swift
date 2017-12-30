@@ -13,15 +13,15 @@ import AlamofireImage
 class MainTableViewController: UITableViewController {
     
     var products = [Product]()
+    var nextPage = 1
+    var hasMoreProducts = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Utils.getProducts(page: 1, completion: {products -> Void in
-            self.products = products
-            self.tableView.reloadData()
-        })
+        self.title = "Galactify by Rouzbeh Majidi"
         
+        loadNext()
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,6 +44,10 @@ class MainTableViewController: UITableViewController {
         let product = products[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "productViewCell", for: indexPath) as! ProductTableViewCell
+        
+        if hasMoreProducts && indexPath.row == self.products.count - 10 {
+            loadNext()
+        }
 
         // Configure the cell...
         cell.productName.text = product.title
@@ -58,6 +62,20 @@ class MainTableViewController: UITableViewController {
         }
         
         return cell
+    }
+    
+    func loadNext(){
+        
+        Utils.getProducts(page: nextPage, completion: {products -> Void in
+            if products.count == 0{
+                self.hasMoreProducts = false
+            }else{
+                self.products += products
+                self.tableView.reloadData()
+                self.nextPage += 1
+            }
+        })
+        
     }
     
     

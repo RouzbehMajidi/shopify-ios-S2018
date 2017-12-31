@@ -122,7 +122,12 @@ class MainTableViewController: UITableViewController {
         let cell = sender as! UITableViewCell
         if let indexPath = tableView.indexPath(for: cell){
             let controller = segue.destination as! ProductDetailViewController
-            controller.product = products[indexPath.row]
+            if isFiltering(){
+                controller.product = filteredProducts[indexPath.row]
+            }else{
+                controller.product = products[indexPath.row]
+            }
+            
         }
     }
     
